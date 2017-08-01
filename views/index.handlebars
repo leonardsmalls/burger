@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="jumbotron">
+        <img src="/assets/images/burger.png">
+        <h1> Eat-Da-Burger! </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel-panel default">
+                <ul class="list-group">
+                    {{#each burger_data}} {{#unless this.devoured}}
+                    <li class="list-group-item">
+                        <div class="input-group">
+                            <p> {{this.burger_name}} </p>
+                            <!--<span class="input-group-btn">-->
+								<form method="POST" action="/burgers/update?_method=PUT" class="button-size">
+									<input type="hidden" type="text" name="burger_id" value={{this.id}}>
+									<button class="btn btn-default btn-lg" type="submit"> EAT IT! </button>
+								</form>
+							<!--</span>-->
+                        </div>
+                    </li>
+                    {{/unless}} {{/each}}
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <ul class="list-group">
+                    {{#each burger_data}} {{#if this.devoured}}
+                    <li class="list-group-item">
+                        <p>{{this.burger_name}} </p>
+                    </li>
+                    {{/if}} {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <p class="lead"> Enter the name of the burger you want to eat & Click the Submit button. </p>
+
+            {{!-- section to add burgers --}}
+            <form class="create-update-form" action="burgers/create" method="POST">
+
+                <div class="form-group">
+                    <textarea class="form-control input-lg" type="text" name="b_name" rows="3"> </textarea>
+                </div>
+
+                <button class="btn btn-default btn-lg" type="submit">Add Burger!</button>
+            </form>
+        </div>
+    </div>
+</div>
